@@ -1,0 +1,73 @@
+            #:--:--:--:--:--:--:--:--:--:--:--:--:--:--:#
+            #                 Klasa Player              #
+            #:--:--:--:--:--:--:--:--:--:--:--:--:--:--:#
+class Player < Obj
+  
+  #KONSTRUKTOR
+  def initialize()
+    super(*InI_1::I1_player)
+    @max_exp_changer = @max_exp
+  end
+  
+  #METODY
+  #Skille
+  def skill_1
+  end
+  
+  def skill_2
+  end
+  
+  def skill_3
+  end
+  
+  def skill_4
+  end
+  
+  def skill_5
+  end
+  
+  def level_up()
+    if @exp >= @max_exp
+      @exp -= @max_exp
+      @max_exp_changer += 50
+      @max_exp += @max_exp_changer
+      
+      @hp += 10
+      @mp += 10
+      
+      $game_player.animation_id = 110
+    end
+  end
+  
+  #Zgon
+    #nadpis
+  def dead()
+    if @hp <= 0
+      @dead_controler = false
+      $game_map.screen.pictures[51].move(0, 21, 21, 101, 100, 255, 0, 20)
+      $game_map.interpreter.wait(20)
+      SceneManager.goto(Scene_Gameover)
+    end
+  end
+  
+  #Atak
+    #nadpis
+  def attack()
+    if ($game_player.x - $game_map.events[6].x).abs <= 1
+      if ($game_player.y - $game_map.events[6].y).abs <= 1
+        if $MAP004Enemies1[0] != nil
+          $MAP004Enemies1[0].receive_damage(inflict_damage())
+        end
+      end
+    end
+    $game_player.animation_id = 69
+  end
+  
+  
+  
+
+  #DESTRUKTOR
+  def dispose()
+  end
+  
+end

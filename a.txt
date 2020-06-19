@@ -1,0 +1,127 @@
+            #:--:--:--:--:--:--:--:--:--:--:--:--:--:--:#
+            #             Klasa dziedziczona            #
+            #:--:--:--:--:--:--:--:--:--:--:--:--:--:--:#
+class Obj
+  
+  #KONSTRUKTOR
+  def initialize(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13)
+    #Atrybuty
+    @hp       = arg1
+    @max_hp   = arg2
+    @regen_hp = arg3
+    @mp       = arg4
+    @max_mp   = arg5
+    @regen_mp = arg6
+    @exp      = arg7
+    @max_exp  = arg8
+    @atack           = arg9
+    @defense         = arg10
+    @evasion         = arg11
+    @critical        = arg12
+    @critical_chance = arg13
+    
+    #Pola "mechaniczne"
+    @dead_controler  = true
+  end
+    attr_accessor :@hp
+    attr_accessor :@max_hp
+    attr_accessor :@regen_hp
+    attr_accessor :@mp
+    attr_accessor :@max_mp
+    attr_accessor :@regen_mp
+    attr_accessor :@exp
+    attr_accessor :@max_exp
+    attr_accessor :@atack
+    attr_accessor :@defense
+    attr_accessor :@evasion
+    attr_accessor :@critical
+    attr_accessor :@critical_chance
+  
+  #GETTERY
+  def get_hp()              return @hp       end
+  def get_max_hp()          return @max_hp   end
+  def get_regeneration_hp() return @regen_hp end
+  def get_mp()              return @mp       end
+  def get_max_mp()          return @max_mp   end
+  def get_regeneration_mp() return @regen_mp end
+  def get_exp()             return @exp      end
+  def get_max_exp()         return @max_exp  end
+    
+  #SETTERY
+  def set_hp(arg)              @hp       = arg end
+  def set_max_hp(arg)          @max_hp   = arg end
+  def set_regeneration_hp(arg) @regen_hp = arg end
+  def set_mp(arg)              @mp       = arg end
+  def set_max_mp(arg)          @max_mp   = arg end
+  def set_regeneration_mp(arg) @regen_mp = arg end
+  def set_exp(arg)             @exp      = arg end
+  def set_max_exp(arg)         @max_exp  = arg end
+  
+  #METODY
+  #Regeneracja zdrowia
+  def regeneration_hp()
+    if @dead_controler
+      if @hp < @max_hp
+        @hp += @regen_hp
+      end
+      if @hp > @max_hp
+        @hp = @max_hp
+      end
+    end
+  end
+  
+  #Regeneracja magii
+  def regeneration_mp()
+    if @mp < @max_mp
+      @mp += @regen_mp
+    end
+    if @mp > @max_mp
+      @mp = @max_mp
+    end
+  end
+  
+  #Zadawane obra¿enia
+  def inflict_damage()
+    random = rand(100)+1
+    if random < @critical_chance
+      return @critical
+    else
+      return @atack
+    end
+  end
+  
+  #Atak
+  def attack()
+  end
+  
+  #Otrzymane obra¿enia
+  def receive_damage(arg)
+    @hp -= arg*(100-@evasion)*0.01
+    if @hp < 0
+      @hp = 0
+    end
+  end
+  
+  #Utrata magii
+  def loss_magic(arg)
+    @mp -= arg;
+    if @mp < 0
+      @mp = 0
+    end
+  end
+  
+  #Ruch
+  def move()
+  end
+  
+  #Zgon
+  def dead()
+  end
+  
+  
+  
+  #DESTRUKTOR
+  def dispose()
+  end
+  
+end

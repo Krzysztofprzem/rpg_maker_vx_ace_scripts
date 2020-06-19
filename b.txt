@@ -1,0 +1,59 @@
+            #:--:--:--:--:--:--:--:--:--:--:--:--:--:--:#
+            #                  Klasa HUD                #
+            #:--:--:--:--:--:--:--:--:--:--:--:--:--:--:#
+class Hud
+  #KONSTRUKTOR
+  def initialize()
+    #Atrybuty pasków
+    @wsp_x     = 0
+    @wsp_y     = 0
+    @wsp_x_hp  = 120
+    @wsp_x_mp  = 120
+    @wsp_x_exp = 21
+    @wsp_y_hp  = 21
+    @wsp_y_mp  = 53
+    @wsp_y_exp = 85
+    
+    #Ramki i paski
+    $game_map.screen.pictures[50].show("ramki",     0, @wsp_x,     @wsp_y,     100, 100, 255, 0)
+    $game_map.screen.pictures[51].show("pasek hp",  0, @wsp_x_hp,  @wsp_y_hp,  0,   100, 255, 0)
+    $game_map.screen.pictures[52].show("pasek mp",  0, @wsp_x_mp,  @wsp_y_mp,  0,   100, 255, 0)
+    $game_map.screen.pictures[53].show("pasek exp", 0, @wsp_x_exp, @wsp_y_exp, 100, 100, 255, 0)
+  end 
+  
+  #METODY
+  
+  def Hud_mechanism(arg)
+    #Zmienne "mechaniczne"
+    hud_max_val = 0
+    hud_val     = 0
+    wsp_y_val   = 0
+    
+    #Wybór zestawu danych dla odpowiedniego paska
+    case arg
+      when 1 
+        hud_max_val = $gracz.get_max_hp()
+        hud_val     = $gracz.get_hp() * 100 / hud_max_val
+        wsp_y_val   = @wsp_y_hp
+      when 2 
+        hud_max_val = $gracz.get_max_mp()
+        hud_val     = $gracz.get_mp() * 100 / hud_max_val
+        wsp_y_val   = @wsp_y_mp
+      when 3 
+        hud_max_val = $gracz.get_max_exp()
+        hud_val     = $gracz.get_exp() * 100 / hud_max_val
+        wsp_y_val   = @wsp_y_exp
+    end
+
+    #Wyœwietlanie paska
+    if (0..100) === hud_val
+        $game_map.screen.pictures[50 + arg].move(0, 21 + hud_val, wsp_y_val, 101 - hud_val, 100, 255, 0, 20)
+    end
+  end
+  
+  
+  #DESTRUKTOR
+  def dispose()
+  end
+  
+end

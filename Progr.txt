@@ -1,0 +1,47 @@
+Programowanie
+
+technologie
+
+- Drupal
+- Symfony
+- React
+
+
+- Java 8
+- Spring
+- Hibernate
+- mikroserwisy
+
+
+(Java)
+- Junit
+- Mockito
+- Hadoop
+- Apache Spark
+- Oracle
+
+
+-Docker
+-Mesos
+-Spring
+
+
+
+- git
+- code review
+- pull request
+- continuous integration
+
+
+Automatyka
+
+- TCL
+- PERL
+
+tools
+- Custom Designer
+- Hercules
+- ICV
+- Quartz
+- Calibre
+- Star-RCXT
